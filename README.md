@@ -3,11 +3,11 @@ Author : Valerian Pyckaert
 Creation : 20/10/2017 
 
 #Tutorials
-##Part 1 : 
+## Part 1 : 
 https://www.youtube.com/watch?v=kI4mpYGqX9s
-##Part 2 : 
+## Part 2 : 
 https://www.youtube.com/watch?v=kI4mpYGqX9s
-##Part 3 : 
+## Part 3 : 
 https://www.youtube.com/watch?v=G38CzghFtsI
 
 ## Deploy environnement :
@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=G38CzghFtsI
 ## MongoDB
 'sudo apt-get install mongodb-org'
 
-##App Dependencies
+## App Dependencies
 ### Express  - Server framework
 npm i express --save 
 
@@ -28,7 +28,7 @@ npm i mongoose --save
 ### Socket.io
 npm i socket.io --save
 
-##Dev Dependencies
+## Dev Dependencies
 ### Mocha : Unit test
 npm i mocha --save-dev
 
@@ -42,7 +42,7 @@ npm i grunt-cli --save-dev
 ### JS DOC
 npm i grunt-jsdoc --save-dev
 
-#Create tools for mongo
-#Create a file named mongod
+# Create tools for mongo
+# Create a file named mongod
 'mongod --bind_ip=$IP --dbpath=data --nojdournal --rest "$@" '
 'sudo chmod +x mongod'
