@@ -30,17 +30,25 @@ router.get('/', (req,res,next) => {
     getIngredients(req,res,next);
 });
 
-router.get('/:id', (req,res,next) => {
-    getIngrediensFromId(req,res,next);
+router.get('/:ingredient_id', (req,res,next) => {
+    getIngredientsFromId(req,res,next);
+});
+
+router.get('/name/:name', (req,res,next) => {
+    getIngredientsFromName(req,res,next);
 });
 
 router.get('/price/:price', (req,res,next) => {
-    getIngrediensFromPrice(req,res,next);
+    getIngredientsFromPrice(req,res,next);
+});
+
+router.get('/weight/:weight', (req,res,next) => {
+    getIngredientsFromWeight(req,res,next);
 });
 
 
 router.get('/pizzaId/:pizzaId', (req,res,next) => {
-    getIngrediensFromPizzaId(req,res,next);
+    getIngredientsFromPizzaId(req,res,next);
 });
  
 router.post('/', (req,res,next) => {
@@ -89,8 +97,31 @@ function getIngredients(req,res,next){
  * @param {Object} res : Express response
  * @param {Object} next : Express next
  */
-function getIngrediensFromId(req,res,next){
+function getIngredientsFromId(req,res,next){
     ingredientSchema.findOne({_id : req.params.ingredient_id})
+    .exec((err, docs) => {
+        if (err) {
+          console.error(err);
+          res.status(500);
+          res.json({ message: err });
+        }
+        else {
+          res.status(200).json(docs);
+        }
+        next();
+      });
+}
+
+
+/**
+ * Get an ingredient from its name
+ * @function
+ * @param {Object} req : Express request
+ * @param {Object} res : Express response
+ * @param {Object} next : Express next
+ */
+function getIngredientsFromName(req,res,next){
+    ingredientSchema.findOne({name : req.params.name})
     .exec((err, docs) => {
         if (err) {
           console.error(err);
@@ -104,6 +135,7 @@ function getIngrediensFromId(req,res,next){
 }
 
 
+
 /**
  * Get an ingredient from its price
  * @function
@@ -111,7 +143,7 @@ function getIngrediensFromId(req,res,next){
  * @param {Object} res : Express response
  * @param {Object} next : Express next
  */
-function getIngrediensFromPrice(req,res,next){
+function getIngredientsFromPrice(req,res,next){
     ingredientSchema.findOne({price : req.params.price})
     .exec((err, docs) => {
         if (err) {
@@ -127,13 +159,34 @@ function getIngrediensFromPrice(req,res,next){
 
 
 /**
+ * Get an ingredient from its weight
+ * @function
+ * @param {Object} req : Express request
+ * @param {Object} res : Express response
+ * @param {Object} next : Express next
+ */
+function getIngredientsFromWeight(req,res,next){
+    ingredientSchema.findOne({weight : req.params.weight})
+    .exec((err, docs) => {
+        if (err) {
+          console.error(err);
+          res.status(500);
+          res.json({ message: err });
+        }
+        else {
+          res.status(200).json(docs);
+        }
+      });
+}
+
+/**
  * Get all ingredients from pizzaId
  * @function
  * @param {Object} req : Express request
  * @param {Object} res : Express response
  * @param {Object} next : Express next
  */
-function getIngrediensFromPizzaId(req,res,next){
+function getIngredientsFromPizzaId(req,res,next){
     ingredientSchema.findOne({pizza_ids : req.params.pizzaId})
     .exec((err, docs) => {
         if (err) {
