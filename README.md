@@ -1,9 +1,44 @@
-# pizzaYnov
-Tp pizza
+# Node Js Pizza Project
+Author : Valerian Pyckaert
+Creation : 20/10/2017 
 
-## To install project :
+#Tutorials
+Part 1 : https://www.youtube.com/watch?v=kI4mpYGqX9s
+Part 2 : https://www.youtube.com/watch?v=kI4mpYGqX9s
+Part 3 : https://www.youtube.com/watch?v=G38CzghFtsI
+
+#Installation process
+## Deploy environnement :
 'sudo apt-get update'
+## MongoDB
 'sudo apt-get install mongodb-org'
+
+##App Dependencies
+### Express  - Server framework
+npm i express --save 
+
+### Body Parser
+npm i body-parser --save
+
+### Mongoose : Orm for MongoDB
+npm i mongoose --save
+
+### Socket.io
+npm i socket.io --save
+
+##Dev Dependencies
+### Mocha : Unit test
+npm i mocha --save-dev
+
+### Chai : Unit test
+npm i chai --save-dev
+
+### Grunt
+npm i grunt --save-dev
+npm i grunt-cli --save-dev
+
+### JS DOC
+npm i grunt-jsdoc --save-dev
 
 #Create tools for mongo
 #Create a file named mongod

@@ -1,2 +1,4 @@
 'use strict';
-require('./Controler/pizzaSpec');
+
+require('./controllerSpec');
+require('./modelSpec');
