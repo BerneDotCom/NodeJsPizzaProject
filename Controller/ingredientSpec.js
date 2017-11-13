@@ -1,7 +1,7 @@
 'use strict';
 const { assert } = require('chai');
 
-describe('Testing pizza routes :', (done) => {
+describe('Testing ingredient routes :', (done) => {
     it('should respond an array', () => {
         assert.strictEqual(1, 1);
     });
