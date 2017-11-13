@@ -3,11 +3,13 @@ Author : Valerian Pyckaert
 Creation : 20/10/2017 
 
 #Tutorials
-Part 1 : https://www.youtube.com/watch?v=kI4mpYGqX9s
-Part 2 : https://www.youtube.com/watch?v=kI4mpYGqX9s
-Part 3 : https://www.youtube.com/watch?v=G38CzghFtsI
+##Part 1 : 
+https://www.youtube.com/watch?v=kI4mpYGqX9s
+##Part 2 : 
+https://www.youtube.com/watch?v=kI4mpYGqX9s
+##Part 3 : 
+https://www.youtube.com/watch?v=G38CzghFtsI
 
-#Installation process
 ## Deploy environnement :
 'sudo apt-get update'
 ## MongoDB

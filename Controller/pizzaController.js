@@ -1,10 +1,17 @@
-'use strict';
  /**
- * Pizza Controller
- * @module pizzaController
+ * @file pizzaController.js
+ * @desc Handle pizza routes in order to create, read, update, delete pizzas from APP<br />
+ * Date de Création : 20/10/2017 <br />
+ * Date de modification :13/11/2017 <br />
+ * 
+ * @version 1.0
+ * 
+ * @author Valerian pyckaert           <valerian.pyckaert@ynov.com>
+ * 
  */
- 
 
+'use strict';
+ 
 // Models
 const pizzaSchema = require('../Model/pizzaSchema');
 const ingredientSchema = require('../Model/ingredientSchema');

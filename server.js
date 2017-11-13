@@ -1,4 +1,18 @@
-//ES6
+ /**
+ * @file server.js
+ * @desc Web server for app Ynov Pizza. <br />
+ * Ynov Pizza allow you to handle pizzas & ingredients <br />
+ * <br />
+ * Date de Création : 20/10/2017 <br />
+ * Date de modification :20/10/2017 <br />
+ * 
+ * @version 1.0
+ * 
+ * @author Valerian pyckaert           <valerian.pyckaert@ynov.com>
+ * 
+ */
+ 
+ 
 'use strict';
 
 // REQUIRE MODULES

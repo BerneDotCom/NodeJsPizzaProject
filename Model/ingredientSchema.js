@@ -1,6 +1,15 @@
+ /**
+ * @file ingredientSchema.js
+ * @desc Schema for ingredients <br />
+ * Date de Création : 20/10/2017 <br />
+ * Date de modification :13/11/2017 <br />
+ * 
+ * @version 1.0
+ * 
+ * @author Valerian pyckaert           <valerian.pyckaert@ynov.com>
+ * 
+ */
 'use strict';
-
-// TODO: Make Doc
 
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
@@ -11,7 +20,7 @@ const IngredientSchema = new Schema({
     name      : { type: String, uniq: true, required: true },
     weight    : { type: String, required: true },
     price     : { type: Number, required: true },
-    pizza_ids : [{ type: Schema.Types.ObjectId, ref: 'Pizza'}], //Choix de ne pas rendre bloquant le fait de créer un ingrédient sans l'affilier à une pizza
+    pizza_ids : [{ type: Schema.Types.ObjectId, ref: 'Pizza'}],
     create_at : { type: Date },
     update_at : { type: Date },
 });
@@ -23,7 +32,9 @@ IngredientSchema.pre('findOneAndUpdate', function (next) {
 });
 
 
-//Insérer pizza ID dans les ingédients.
+/**
+ * @desc Insert pizzas id in the ingredien
+ */ 
 IngredientSchema.pre('save', function(next) {
   this.update_at = Date.now();
   if (this.isNew) {
@@ -36,7 +47,5 @@ IngredientSchema.pre('save', function(next) {
   .exec();
   next();
 });
-
-
 
 module.exports = mongoose.model('Ingredient', IngredientSchema);

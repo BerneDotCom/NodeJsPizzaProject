@@ -1,8 +1,17 @@
-'use strict';
  /**
- * Schéma Pizza
- * @module PizzaSchema
+ * @file pizzaSchema.js
+ * @desc Schema for pizzas <br />
+ * Date de Création : 20/10/2017 <br />
+ * Date de modification :13/11/2017 <br />
+ * 
+ * @version 1.0
+ * 
+ * @author Valerian pyckaert           <valerian.pyckaert@ynov.com>
+ * 
  */
+
+'use strict';
+
 
 /**
  * @requires Schema
@@ -10,16 +19,15 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-// Schema PizzaSchema
 /**
  * @class PizzaSchema
- * @param {String} name - Nom de la pizza (Requis)
- * @param {String} desc - Courte description accrocheur de la pizza sexy (Requis)
- * @param {String} picture - Image de la pizza stocké en base 64
- * @param {Array} ingredients - Liste des ingredients (Requis)
- * @param {Number} price - Prix de la pizza (Requis)
- * @param {Date} create_at - Date de création
- * @param {Date} update_at - Date de mise à jour
+ * @param {String} name - Pizza name (required)
+ * @param {String} desc - Little description of the pizza (required)
+ * @param {String} picture - Picture of the pizza as base64Image
+ * @param {Array} ingredients - Ingredient list (required)
+ * @param {Number} price - Pizza price (required)
+ * @param {Date} create_at - Creation date
+ * @param {Date} update_at - Last update date
  * @return {Schema}
  */
 const pizzaSchema = new Schema({
@@ -34,7 +42,7 @@ const pizzaSchema = new Schema({
 
 /**
  * @function preValidate
- * @param {function} next - Permet d'appeler le prochain middleware
+ * @param {function} next - Call the next middleware
  * @description WIP
  */
 pizzaSchema.pre('validate', (next) => {
@@ -46,22 +54,15 @@ pizzaSchema.pre('validate', (next) => {
 /**
  * @function preSave
  * @param {function} next - Express next middleware function
- * @param {Object} err - Message generate when an error occurre
- * @description Sauvegarde en base la date de modification ainsi que la date de création si l'objet est nouveau
- * Mettre un ingrédient dans une pizza à l'aide de son ID, à la modification ou à la 
- * création de la pizza
+ * @param {Object} err - Message generate when an error occurr
+ * @description Save the last update and the creation date if it's a new object
+ * Update ingredients when a pizza is updated
  */
- //crème fraiche: 5a08cab1ceefce4dccc1920d
- //tartiflette : 5a072828682f06bd7c65efff
- //TESTER si à la création d'une pizza les ingrédients spécifiés s'enregistre aussi 
-//---------- MARCHE !!!! ----------//  
 pizzaSchema.pre('save', function(next, err) {
     this.update_at = Date.now();
         if (this.isNew) {
             this.create_at = this.update_at;
         }
-      // console.log(`Date de mise à jour ${this.update_at}`)    
-      // console.log(`Date de création ${this.create_at}`)    
       // Update all ingredients
       mongoose.model('Ingredient')
       .update({ _id: { $in: this.ingredient_ids }},
