@@ -25,34 +25,34 @@ let should = chai.should();
 
 describe('Test pizza getting routes', (done) => {
     it('Should get all pizzas in the app', (done) => {
-       chai.request(server).get('/pizza').end((err, res) => {
+        chai.request(server).get('/pizza').end((err, res) => {
             err => console.log(err),
             res => {
                 res.should.have.status(200);
                 
                 res.should.be.a('array');
             }
-          done(); 
-       });
+        });
+        done(); 
     });
     
     
     //_id = 5a096e7ea5326658f079c8f1 - Pizza royale
     it('Should be an object', (done) => {
-       chai.request(server).get('/pizza/5a096e7ea5326658f079c8f1').end((err, res) => {
+        chai.request(server).get('/pizza/5a096e7ea5326658f079c8f1').end((err, res) => {
            
             err => console.log(err),
             
             res => res.should.be.a('Object');
             
-          done(); 
-       });
+        });
+        done(); 
     });
     
     
     //_id = 5a096e7ea5326658f079c8f1 - Pizza royale
     it('Should be a Pizza object filled with all properties', (done) => {
-       chai.request(server).get('/pizza/5a096e7ea5326658f079c8f1').end((err, res) => {
+        chai.request(server).get('/pizza/5a096e7ea5326658f079c8f1').end((err, res) => {
             err => console.log(err),
             res => {
                 
@@ -67,8 +67,9 @@ describe('Test pizza getting routes', (done) => {
                 res.should.have.property('update_at');
                 
             }
-          done(); 
-       });
+
+        });
+        done(); 
     });
 });
 

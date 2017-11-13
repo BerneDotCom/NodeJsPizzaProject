@@ -2,18 +2,24 @@
 Author : Valerian Pyckaert
 Creation : 20/10/2017 
 
-#Tutorials
-## Part 1 : 
+## Tutorials
+### Part 1 : 
 https://www.youtube.com/watch?v=kI4mpYGqX9s
-## Part 2 : 
+### Part 2 : 
 https://www.youtube.com/watch?v=kI4mpYGqX9s
-## Part 3 : 
+### Part 3 : 
 https://www.youtube.com/watch?v=G38CzghFtsI
 
 ## Deploy environnement :
 'sudo apt-get update'
 ## MongoDB
 'sudo apt-get install mongodb-org'
+
+### Create tools for mongo
+Create a file named mongod containing : 
+'mongod --bind_ip=$IP --dbpath=data --nojdournal --rest "$@" '
+'sudo chmod +x mongod'
+
 
 ## App Dependencies
 ### Express  - Server framework
@@ -42,7 +48,5 @@ npm i grunt-cli --save-dev
 ### JS DOC
 npm i grunt-jsdoc --save-dev
 
-# Create tools for mongo
-# Create a file named mongod
-'mongod --bind_ip=$IP --dbpath=data --nojdournal --rest "$@" '
-'sudo chmod +x mongod'
+#Unit test
+Run "npm test" in terminal
