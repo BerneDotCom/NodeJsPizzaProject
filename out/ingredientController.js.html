@@ -58,17 +58,25 @@ router.get('/', (req,res,next) => {
     getIngredients(req,res,next);
 });
 
-router.get('/:id', (req,res,next) => {
-    getIngrediensFromId(req,res,next);
+router.get('/:ingredient_id', (req,res,next) => {
+    getIngredientsFromId(req,res,next);
+});
+
+router.get('/name/:name', (req,res,next) => {
+    getIngredientsFromName(req,res,next);
 });
 
 router.get('/price/:price', (req,res,next) => {
-    getIngrediensFromPrice(req,res,next);
+    getIngredientsFromPrice(req,res,next);
+});
+
+router.get('/weight/:weight', (req,res,next) => {
+    getIngredientsFromWeight(req,res,next);
 });
 
 
 router.get('/pizzaId/:pizzaId', (req,res,next) => {
-    getIngrediensFromPizzaId(req,res,next);
+    getIngredientsFromPizzaId(req,res,next);
 });
  
 router.post('/', (req,res,next) => {
@@ -117,8 +125,31 @@ function getIngredients(req,res,next){
  * @param {Object} res : Express response
  * @param {Object} next : Express next
  */
-function getIngrediensFromId(req,res,next){
+function getIngredientsFromId(req,res,next){
     ingredientSchema.findOne({_id : req.params.ingredient_id})
+    .exec((err, docs) => {
+        if (err) {
+          console.error(err);
+          res.status(500);
+          res.json({ message: err });
+        }
+        else {
+          res.status(200).json(docs);
+        }
+        next();
+      });
+}
+
+
+/**
+ * Get an ingredient from its name
+ * @function
+ * @param {Object} req : Express request
+ * @param {Object} res : Express response
+ * @param {Object} next : Express next
+ */
+function getIngredientsFromName(req,res,next){
+    ingredientSchema.findOne({name : req.params.name})
     .exec((err, docs) => {
         if (err) {
           console.error(err);
@@ -132,6 +163,7 @@ function getIngrediensFromId(req,res,next){
 }
 
 
+
 /**
  * Get an ingredient from its price
  * @function
@@ -139,7 +171,7 @@ function getIngrediensFromId(req,res,next){
  * @param {Object} res : Express response
  * @param {Object} next : Express next
  */
-function getIngrediensFromPrice(req,res,next){
+function getIngredientsFromPrice(req,res,next){
     ingredientSchema.findOne({price : req.params.price})
     .exec((err, docs) => {
         if (err) {
@@ -155,13 +187,34 @@ function getIngrediensFromPrice(req,res,next){
 
 
 /**
+ * Get an ingredient from its weight
+ * @function
+ * @param {Object} req : Express request
+ * @param {Object} res : Express response
+ * @param {Object} next : Express next
+ */
+function getIngredientsFromWeight(req,res,next){
+    ingredientSchema.findOne({weight : req.params.weight})
+    .exec((err, docs) => {
+        if (err) {
+          console.error(err);
+          res.status(500);
+          res.json({ message: err });
+        }
+        else {
+          res.status(200).json(docs);
+        }
+      });
+}
+
+/**
  * Get all ingredients from pizzaId
  * @function
  * @param {Object} req : Express request
  * @param {Object} res : Express response
  * @param {Object} next : Express next
  */
-function getIngrediensFromPizzaId(req,res,next){
+function getIngredientsFromPizzaId(req,res,next){
     ingredientSchema.findOne({pizza_ids : req.params.pizzaId})
     .exec((err, docs) => {
         if (err) {
@@ -265,13 +318,13 @@ module.exports = router</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#create">create</a></li><li><a href="global.html#deleteIngredient">deleteIngredient</a></li><li><a href="global.html#deletePizza">deletePizza</a></li><li><a href="global.html#getIngrediensFromId">getIngrediensFromId</a></li><li><a href="global.html#getIngrediensFromPizzaId">getIngrediensFromPizzaId</a></li><li><a href="global.html#getIngrediensFromPrice">getIngrediensFromPrice</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getPizzaFromId">getPizzaFromId</a></li><li><a href="global.html#getPizzaFromIngredient">getPizzaFromIngredient</a></li><li><a href="global.html#getPizzaFromName">getPizzaFromName</a></li><li><a href="global.html#getPizzaFromPrice">getPizzaFromPrice</a></li><li><a href="global.html#getPizzaFromUpdateDate">getPizzaFromUpdateDate</a></li><li><a href="global.html#getPizzas">getPizzas</a></li><li><a href="global.html#update">update</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#create">create</a></li><li><a href="global.html#deleteIngredient">deleteIngredient</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getIngredientsFromId">getIngredientsFromId</a></li><li><a href="global.html#getIngredientsFromName">getIngredientsFromName</a></li><li><a href="global.html#getIngredientsFromPizzaId">getIngredientsFromPizzaId</a></li><li><a href="global.html#getIngredientsFromPrice">getIngredientsFromPrice</a></li><li><a href="global.html#getIngredientsFromWeight">getIngredientsFromWeight</a></li><li><a href="global.html#update">update</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Nov 13 2017 17:36:59 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Nov 13 2017 18:11:15 GMT+0000 (UTC)
 </footer>
 
 <script> prettyPrint(); </script>

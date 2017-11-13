@@ -30,7 +30,7 @@ router.get('/', (req,res,next) => {
     getPizzas(req,res,next);
 }); 
 
-router.get('/:id', (req,res,next) => {
+router.get('/:pizza_id', (req,res,next) => {
     getPizzaFromId(req,res,next);
 }); 
 
@@ -54,11 +54,11 @@ router.post('/', (req,res,next) => {
     create(req,res,next);
 }); 
 
-router.put('/:pizzaId', (req,res,next) => {
+router.put('/:pizza_id', (req,res,next) => {
     update(req,res,next);
 });
 
-router.delete('/', (req,res,next) => {
+router.delete('/:pizza_id', (req,res,next) => {
     deletePizza(req,res,next);
 });
 
@@ -97,7 +97,7 @@ function getPizzas(req,res,next){
  * @param {Object} next : Express next
  */
 function getPizzaFromId(req,res,next){
-    pizzaSchema.find({ _id: req.params._id })
+    pizzaSchema.find({ _id: req.params.pizza_id })
     .populate('ingredient_ids')
     .exec((err, docs) => {
         if (err) {
@@ -239,7 +239,7 @@ function create(req,res,next){
  * @param {Object} next : Express next
  */
 function update(req,res,next){
-    pizzaSchema.findById({_id: req.params.id}), (err, pizza) => {
+    pizzaSchema.findById({_id: req.params.pizza_id}), (err, pizza) => {
         if(err){
             res.send(err)
         }else{
@@ -267,7 +267,7 @@ function update(req,res,next){
  * @param {Object} next : Express next
  */
 function deletePizza(req,res,next){
-    pizzaSchema.remove({_id: req.params.id}, (err, pizza) => {
+    pizzaSchema.remove({_id: req.params.pizza_id}, (err, pizza) => {
         if(err){
             res.status(500);
             res.send(err);

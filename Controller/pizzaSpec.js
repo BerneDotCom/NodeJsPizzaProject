@@ -104,7 +104,7 @@ describe('Test pizza Create, update, delete routes', (done) => {
         let pizzaTest = new pizzaSchema ({name: "Pizza de test", desc: "Une belle pizza de test", price: 10, picture: " ", ingredient_ids: []});
         
         pizzaTest.save((err, pizzaTest) => {
-            chai.request(server).put('/pizza'+ pizzaTest._id)
+            chai.request(server).put('/pizza/'+ pizzaTest._id)
                 .send({name: "Pizza de test magnifiquement fonctionnelle"})
                 .end((err, res) => {
                     err => console.log(err),
