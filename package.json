@@ -14,6 +14,7 @@
   "description": "Un gestionnaire de pizza basique",
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "grunt": "~0.4.5",
     "grunt-cli": "^1.2.0",
     "grunt-jsdoc": "^2.2.0",

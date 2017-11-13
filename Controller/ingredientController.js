@@ -1,6 +1,6 @@
  /**
  * @file ingredientController.js
- * @desc Handle pizza routes in order to create, read, update, delete pizzas from APP<br />
+ * @desc Handle ingredients routes in order to create, read, update, delete ingredient from APP<br />
  * Date de Création : 20/10/2017 <br />
  * Date de modification :13/11/2017 <br />
  * 
