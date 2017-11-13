@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pizzaSpec.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pizzaSpec.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code> /**
+ * @file pizzaSpec.js
+ * @desc Unit test file for pizzaController&lt;br />
+ * Date de Création : 20/10/2017 &lt;br />
+ * Date de modification :13/11/2017 &lt;br />
+ * 
+ * @version 1.0
+ * 
+ * @author Valerian pyckaert           &lt;valerian.pyckaert@ynov.com>
+ * 
+ */
+
+'use strict';
+const server = require('../server'),
+        pizzaSchema = require('../Model/pizzaSchema'),
+        mongoose = require('mongoose'),
+        mocha = require('mocha'),
+        chai = require('chai'),
+        http = require('chai-http');
+        
+chai.use(http);
+
+let should = chai.should();
+
+
+describe('Test pizza getting routes', (done) => {
+    it('Should get all pizzas in the app', (done) => {
+        chai.request(server).get('/pizza').end((err, res) => {
+            err => console.log(err),
+            res => {
+                res.should.have.status(200);
+                
+                res.should.be.a('array');
+            }
+        });
+        done(); 
+    });
+    
+    
+    //_id = 5a096e7ea5326658f079c8f1 - Pizza royale
+    it('Should be an object', (done) => {
+        chai.request(server).get('/pizza/5a096e7ea5326658f079c8f1').end((err, res) => {
+           
+            err => console.log(err),
+            
+            res => res.should.be.a('Object');
+            
+        });
+        done(); 
+    });
+    
+    
+    //_id = 5a096e7ea5326658f079c8f1 - Pizza royale
+    it('Should be a Pizza object filled with all properties', (done) => {
+        chai.request(server).get('/pizza/5a096e7ea5326658f079c8f1').end((err, res) => {
+            err => console.log(err),
+            res => {
+                
+                //Test all properties of PizzaSchema
+                res.should.have.property('_id');
+                res.should.have.property('name');
+                res.should.have.property('desc');
+                res.should.have.property('picture');
+                res.should.have.property('price');
+                res.should.have.property('ingredient_ids');
+                res.should.have.property('create_at');
+                res.should.have.property('update_at');
+                
+            }
+
+        });
+        done(); 
+    });
+});
+
+describe('Test pizza Create, update, delete routes', (done) => {
+    
+    it('Should post a the pizza given', (done) => {
+        //Object pizza to test the post request
+        let pizzaTest = {name: "Pizza de test", desc: "Une belle pizza de test", price: 10, picture: " ", ingredient_ids: []};
+        
+        chai.request(server).post('/pizza')
+            .send(pizzaTest)
+            .end((err, res) => {
+                err => console.log(err),
+                res => {
+                    //Test all properties of PizzaSchema
+                    res.should.have.property('_id');
+                    res.should.have.property('name');
+                    res.should.have.property('desc');
+                    res.should.have.property('picture');
+                    res.should.have.property('price');
+                    res.should.have.property('ingredient_ids');
+                    res.should.have.property('create_at');
+                    res.should.have.property('update_at');
+                }
+            });
+       done();    
+    });
+    
+    
+    it('Should update the pizza given', (done) => {
+        //Object pizza to test the post request
+        let pizzaTest = new pizzaSchema ({name: "Pizza de test", desc: "Une belle pizza de test", price: 10, picture: " ", ingredient_ids: []});
+        
+        pizzaTest.save((err, pizzaTest) => {
+            chai.request(server).put('/pizza'+ pizzaTest._id)
+                .send({name: "Pizza de test magnifiquement fonctionnelle"})
+                .end((err, res) => {
+                    err => console.log(err),
+                    res => {
+                        //Test all properties of PizzaSchema
+                        res.should.have.property('_id');
+                        res.should.have.property('name');
+                        res.should.have.property('desc');
+                        res.should.have.property('picture');
+                        res.should.have.property('price');
+                        res.should.have.property('ingredient_ids');
+                        res.should.have.property('create_at');
+                        res.should.have.property('update_at');
+                        
+                        //Test the previous update name
+                        res.should.have.property('name').eql("Pizza de test magnifiquement fonctionnelle");
+                    }
+                });
+        });
+        
+        done();    
+    });
+    
+    
+    it('Should delete the pizza given', (done) => {
+        //Object pizza to test the delete request
+        let pizzaTest = new pizzaSchema ({name: "Pizza de test", desc: "Une belle pizza de test", price: 10, picture: " ", ingredient_ids: []});
+        
+        pizzaTest.save((err, pizzaTest) => {
+            chai.request(server)
+                .delete('/pizza/' + pizzaTest._id)
+                .end((err, res) => {
+                    err => console.log(err),
+                    res => {
+                        //Test return code
+                        res.should.have.status(200);
+                    }
+                });
+        });
+        
+        done();    
+    });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#create">create</a></li><li><a href="global.html#deleteIngredient">deleteIngredient</a></li><li><a href="global.html#deletePizza">deletePizza</a></li><li><a href="global.html#getIngrediensFromId">getIngrediensFromId</a></li><li><a href="global.html#getIngrediensFromPizzaId">getIngrediensFromPizzaId</a></li><li><a href="global.html#getIngrediensFromPrice">getIngrediensFromPrice</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getPizzaFromId">getPizzaFromId</a></li><li><a href="global.html#getPizzaFromIngredient">getPizzaFromIngredient</a></li><li><a href="global.html#getPizzaFromName">getPizzaFromName</a></li><li><a href="global.html#getPizzaFromPrice">getPizzaFromPrice</a></li><li><a href="global.html#getPizzaFromUpdateDate">getPizzaFromUpdateDate</a></li><li><a href="global.html#getPizzas">getPizzas</a></li><li><a href="global.html#update">update</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Nov 13 2017 17:36:59 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
