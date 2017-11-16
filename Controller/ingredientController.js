@@ -98,7 +98,7 @@ function getIngredients(req,res,next){
  * @param {Object} next : Express next
  */
 function getIngredientsFromId(req,res,next){
-    ingredientSchema.findOne({_id : req.params.ingredient_id})
+    ingredientSchema.findById(req.params.ingredient_id)
     .exec((err, docs) => {
         if (err) {
           console.error(err);

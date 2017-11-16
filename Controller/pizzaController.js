@@ -97,7 +97,7 @@ function getPizzas(req,res,next){
  * @param {Object} next : Express next
  */
 function getPizzaFromId(req,res,next){
-    pizzaSchema.find({ _id: req.params.pizza_id })
+    pizzaSchema.findById(req.params.pizza_id)
     .populate('ingredient_ids')
     .exec((err, docs) => {
         if (err) {
