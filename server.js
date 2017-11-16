@@ -23,7 +23,8 @@ const path       = require('path'),
       mongoose   = require('mongoose'),
       bodyParser = require('body-parser'),
       io         = require('socket.io')(http),
-      port       = process.env.PORT || 3000;
+      port       = process.env.PORT || 3000,
+      cors = require('cors');
       
 // Db connection
 mongoose.connect('mongodb://localhost/pizza', err => {
@@ -49,6 +50,8 @@ const Ingredient = require ('./Controller/ingredientController');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+//Cors
+app.use(cors());
 
 //App routers
 app.use('/pizza', Pizza); //Pizza routes (get, getBy*, put, post, delete)
