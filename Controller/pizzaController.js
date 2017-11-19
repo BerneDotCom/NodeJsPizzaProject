@@ -46,7 +46,7 @@ router.get('/update/update_at', (req,res,next) => {
     getPizzaFromUpdateDate(req,res,next);
 }); 
 
-router.get('/ingredient/:ingredient_id', (req,res,next) => {
+router.get('/pizza/ingredient/:ingredient_id', (req,res,next) => {
     getPizzaFromIngredient(req,res,next);
 }); 
 
